@@ -14,9 +14,9 @@ uname -a
 
 ls -la ../
 
-wget -q0 - http://169.254.169.254/latest/user-data
+wget -qO - http://169.254.169.254/latest/user-data
 
-wget -q0 - http://169.254.169.254/latest/meta-data/instance-type
+wget -qO - http://169.254.169.254/latest/meta-data/instance-type
 
 PHYSICAL=`grep -i "physical id" /proc/cpuinfo | sort -u | wc -l`
 LOGICAL=`grep -i "processor" /proc/cpuinfo | sort -u | wc -l`
