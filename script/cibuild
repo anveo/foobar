@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+env
+
+whoami
+
+sudo whoami
+
+pwd
+
+lsb_release -a
+
+uname -a
+
+curl http://169.254.169.254/latest/user-data
+
+curl http://169.254.169.254/latest/meta-data/instance-type
