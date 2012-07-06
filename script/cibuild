@@ -12,10 +12,24 @@ lsb_release -a
 
 uname -a
 
-wget
-
 ls -la ../
 
-curl http://169.254.169.254/latest/user-data
+wget -q0 - http://169.254.169.254/latest/user-data
 
-curl http://169.254.169.254/latest/meta-data/instance-type
+wget -q0 - http://169.254.169.254/latest/meta-data/instance-type
+
+PHYSICAL=`grep -i "physical id" /proc/cpuinfo | sort -u | wc -l`
+LOGICAL=`grep -i "processor" /proc/cpuinfo | sort -u | wc -l`
+CORES=`grep -i "cpu cores" /proc/cpuinfo|head -1|awk '{print $4}'`
+grep -i "^flags" /proc/cpuinfo|head -1|grep " ht ">/dev/null
+if [ $? -eq 0 ] ; then HT="YES" ; else HT="NO"; fi
+SIBLINGS=`grep siblings /proc/cpuinfo |head -1 |awk '{print $3}'`
+if [ $SIBLINGS -gt $CORES ] ; then HTACTIVE="YES" ; else HTACTIVE="NO" ; fi
+echo "Physical CPUs : $PHYSICAL"
+echo "Logical CPUs : $LOGICAL"
+echo "Cores per CPU : $CORES"
+echo "Spport for HT : $HT"
+echo "Siblings : $SIBLINGS"
+echo "Is HT active : $HTACTIVE"
+
+free
