@@ -4,7 +4,7 @@ env
 
 whoami
 
-sudo whoami
+#sudo whoami
 
 pwd
 
